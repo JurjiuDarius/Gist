@@ -18,7 +18,7 @@ export class AllGistsComponent {
     this.gistsService
       .getGistsForUser(this.currentUsername)
       .subscribe((gists) => {
-        this.gists = gists.slice(0, 3);
+        this.gists = gists.slice(0, 10);
         this.gists.forEach((gist) => {
           this.gistsService.getGistForks(gist.id).subscribe((response) => {
             //Sort the forks in ascending order and get latest 3
