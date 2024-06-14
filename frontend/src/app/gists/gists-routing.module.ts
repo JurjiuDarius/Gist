@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllGistsComponent } from './all-gists/all-gists.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () =>
-      import('./gists/gists.module').then((m) => m.GistsModule),
+    component: AllGistsComponent,
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class GistsRoutingModule {}
