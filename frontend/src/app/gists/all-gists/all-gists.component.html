@@ -8,7 +8,7 @@
 </div>
 <div class="gist-list">
   <div class="gist" *ngFor="let gist of gists" (click)="onGistClick(gist.id)">
-    <h2>{{ gist.description }}</h2>
+    <h2>{{ gist.description || "No description" }}</h2>
     <div class="files">
       <h3>Files</h3>
       <div class="file-list" *ngFor="let filename of objectKeys(gist.files)">

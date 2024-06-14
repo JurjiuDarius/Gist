@@ -1,16 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/app/environments';
+import { Gist } from 'src/app/models/gist';
 @Injectable({
   providedIn: 'root',
 })
 export class GistsService {
   private apiUrl = environment.gitApiUrl;
+  gists: Gist[] = [];
   constructor(private http: HttpClient) {}
 
   getGistsForUser(username: string): Observable<any> {
-    return this.http.get(this.apiUrl + `users/${username}/gists`);
+    return this.http
+      .get(this.apiUrl + `users/${username}/gists`)
+      .pipe(tap((gists: any) => (this.gists = gists)));
   }
 
   getGistForks(gistId: string): Observable<any> {
@@ -21,5 +25,11 @@ export class GistsService {
   }
   getGistDetails(gistId: string): Observable<any> {
     return this.http.get(this.apiUrl + `gists/${gistId}`);
+  }
+  getGists(): Gist[] {
+    return this.gists;
+  }
+  setGists(gists: Gist[]) {
+    this.gists = gists;
   }
 }

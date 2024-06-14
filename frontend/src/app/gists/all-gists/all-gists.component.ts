@@ -9,10 +9,16 @@ import { GistsService } from '../service/gists.service';
   styleUrls: ['./all-gists.component.scss'],
 })
 export class AllGistsComponent {
+  // This is an account suggestion to showcase how the app works
   currentUsername: string = 'matthewmueller';
   gists: Gist[] = [];
 
-  constructor(private gistsService: GistsService, private router: Router) {}
+  constructor(private gistsService: GistsService, private router: Router) {
+    //Check if there is a cached list of gists
+    if (this.gistsService.gists.length > 0) {
+      this.gists = this.gistsService.gists;
+    }
+  }
 
   searchGistsForCurrentUser() {
     this.gistsService
