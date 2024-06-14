@@ -1,1 +1,22 @@
-<p>all-gists works!</p>
+<div class="search">
+  <input
+    type="text"
+    [(ngModel)]="currentUsername"
+    placeholder="Enter GitHub username"
+  />
+  <button (click)="searchGistsForCurrentUser()">Search</button>
+</div>
+<div class="gist-list">
+  <div class="gist" *ngFor="let gist of gists">
+    <h2>{{ gist.description }}</h2>
+    <div class="files" *ngFor="let filename of objectKeys(gist.files)">
+      <p>
+        {{ filename }}
+        <span class="badge">.{{ getFileExtension(filename) }}</span>
+      </p>
+    </div>
+    <div class="previous-forks" *ngFor="let fork of gist.previousForks">
+      <p>{{ fork }}</p>
+    </div>
+  </div>
+</div>
