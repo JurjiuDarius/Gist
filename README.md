@@ -2,13 +2,15 @@
 
 This is a project that uses the Github gist api to display public gists.
 
-To run this project, run the following commands:
+To run this project, make sure the Docker daemon is running and run the following commands from the repository root:
 
 ```
 cd frontend
 docker build -t gist-angular-app .
 docker run -p 8080:80 gist-angular-app
 ```
+
+After running these, access localhost:8080.
 
 ### Notes
 
@@ -18,4 +20,4 @@ Due to the unauthenticated request limit on the Github api, the gist list gets s
 
 The gist list gets cached when accessing the content.
 
-I used SCSS, hpefully that's not a problem.
+I used SCSS, hopefully that's not a problem.

@@ -14,7 +14,11 @@ export class GistsService {
   getGistsForUser(username: string): Observable<any> {
     return this.http
       .get(this.apiUrl + `users/${username}/gists`)
-      .pipe(tap((gists: any) => (this.gists = gists)));
+      .pipe(
+        tap(
+          (gists: any) => (this.gists = gists.slice(0, environment.MAX_GISTS))
+        )
+      );
   }
 
   getGistForks(gistId: string): Observable<any> {
