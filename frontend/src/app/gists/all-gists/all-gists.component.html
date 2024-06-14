@@ -23,6 +23,7 @@
       <div class="fork-list" *ngFor="let fork of gist.forks">
         <p>{{ fork }}</p>
       </div>
+      <p *ngIf="!gist.forks || gist.forks.length === 0">No forks yet</p>
     </div>
   </div>
 </div>

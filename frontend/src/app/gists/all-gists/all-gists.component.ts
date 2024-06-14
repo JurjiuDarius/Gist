@@ -11,14 +11,11 @@ import { GistsService } from '../service/gists.service';
 })
 export class AllGistsComponent {
   // This is an account suggestion to showcase how the app works
-  currentUsername: string = 'matthewmueller';
+  currentUsername: string = 'octocat';
   gists: Gist[] = [];
 
   constructor(private gistsService: GistsService, private router: Router) {
-    //Check if there is a cached list of gists
-    if (this.gistsService.gists.length > 0) {
-      this.gists = this.gistsService.gists;
-    }
+    this.checkCachedGists();
   }
 
   searchGistsForCurrentUser() {
@@ -28,18 +25,27 @@ export class AllGistsComponent {
         this.gists = gists.slice(0, environment.MAX_GISTS);
         this.gists.forEach((gist) => {
           this.gistsService.getGistForks(gist.id).subscribe((response) => {
-            //Sort the forks in ascending order and get latest 3
-            response.sort((a: any, b: any) => {
-              return a.created_at - b.created_at;
-            });
-            const forks: string[] = response.splice(-3).map((fork: any) => {
-              return fork.owner.login;
-            });
-
-            gist.forks = forks;
+            gist.forks = this.getLatestForks(response);
           });
         });
       });
+  }
+
+  getLatestForks(forks: any[], limit: number = 3) {
+    forks.sort((a: any, b: any) => {
+      return a.created_at - b.created_at;
+    });
+    const ownerNames: string[] = forks.splice(-limit).map((fork: any) => {
+      return fork.owner.login;
+    });
+    return ownerNames;
+  }
+  checkCachedGists() {
+    if (this.gistsService.getGists().length > 0) {
+      this.gists = this.gistsService.getGists();
+    } else {
+      this.searchGistsForCurrentUser();
+    }
   }
   onGistClick(id: string) {
     this.router.navigate(['/gist-details/' + id]);
