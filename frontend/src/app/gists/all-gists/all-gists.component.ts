@@ -17,9 +17,25 @@ export class AllGistsComponent {
     this.gistsService
       .getGistsForUser(this.currentUsername)
       .subscribe((gists) => {
-        this.gists = gists;
         console.log(gists);
+        this.gists = gists.slice(0, 3);
+        this.gists.forEach((gist) => {
+          this.gistsService.getGistForks(gist.id).subscribe((response) => {
+            //Sort the forks in ascending order and get latest 3
+            response.sort((a: any, b: any) => {
+              return a.created_at - b.created_at;
+            });
+            const forks: string[] = response.splice(-3).map((fork: any) => {
+              return fork.owner.login;
+            });
+
+            gist.forks = forks;
+          });
+        });
       });
+  }
+  onGistClick() {
+    console.log('gist clicked');
   }
   getFileExtension(filename: string) {
     return extractFileExtension(filename);

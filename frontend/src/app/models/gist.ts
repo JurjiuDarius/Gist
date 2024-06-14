@@ -7,5 +7,5 @@ export interface Gist {
       type: string;
     };
   };
-  previousForks: string[];
+  forks: string[];
 }

@@ -7,16 +7,22 @@
   <button (click)="searchGistsForCurrentUser()">Search</button>
 </div>
 <div class="gist-list">
-  <div class="gist" *ngFor="let gist of gists">
+  <div class="gist" *ngFor="let gist of gists" (click)="onGistClick()">
     <h2>{{ gist.description }}</h2>
-    <div class="files" *ngFor="let filename of objectKeys(gist.files)">
-      <p>
-        {{ filename }}
-        <span class="badge">.{{ getFileExtension(filename) }}</span>
-      </p>
+    <div class="files">
+      <h3>Files</h3>
+      <div class="file-list" *ngFor="let filename of objectKeys(gist.files)">
+        <p>
+          {{ filename }}
+          <span class="badge">.{{ getFileExtension(filename) }}</span>
+        </p>
+      </div>
     </div>
-    <div class="previous-forks" *ngFor="let fork of gist.previousForks">
-      <p>{{ fork }}</p>
+    <div class="previous-forks">
+      <h3>Forks</h3>
+      <div class="fork-list" *ngFor="let fork of gist.forks">
+        <p>{{ fork }}</p>
+      </div>
     </div>
   </div>
 </div>
