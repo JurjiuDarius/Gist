@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/app/environments';
 import { Gist } from 'src/app/models/gist';
 import { extractFileExtension } from 'src/app/utils/string-utils';
 import { GistsService } from '../service/gists.service';
@@ -24,7 +25,7 @@ export class AllGistsComponent {
     this.gistsService
       .getGistsForUser(this.currentUsername)
       .subscribe((gists) => {
-        this.gists = gists.slice(0, 10);
+        this.gists = gists.slice(0, environment.MAX_GISTS);
         this.gists.forEach((gist) => {
           this.gistsService.getGistForks(gist.id).subscribe((response) => {
             //Sort the forks in ascending order and get latest 3

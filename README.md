@@ -16,4 +16,6 @@ The requirements said there should be a list of file items, as well as tags for 
 
 Due to the unauthenticated request limit on the Github api, the gist list gets sliced. Otherwise, there would have been an error, as some users have a lot of gists. Implementing authentication was not in the requirements, so I didn't do that.
 
+The gist list gets cached when accessing the content.
+
 I used SCSS, hpefully that's not a problem.
