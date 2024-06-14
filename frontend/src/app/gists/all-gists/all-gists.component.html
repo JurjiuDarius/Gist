@@ -7,7 +7,7 @@
   <button (click)="searchGistsForCurrentUser()">Search</button>
 </div>
 <div class="gist-list">
-  <div class="gist" *ngFor="let gist of gists" (click)="onGistClick()">
+  <div class="gist" *ngFor="let gist of gists" (click)="onGistClick(gist.id)">
     <h2>{{ gist.description }}</h2>
     <div class="files">
       <h3>Files</h3>

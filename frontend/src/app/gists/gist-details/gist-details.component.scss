@@ -1,0 +1,25 @@
+.code-boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .code-box {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    background-color: #f5f5f5;
+
+    .file-name {
+      align-self: flex-start;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .code-content {
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+  }
+}

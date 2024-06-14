@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Gist } from 'src/app/models/gist';
 import { extractFileExtension } from 'src/app/utils/string-utils';
 import { GistsService } from '../service/gists.service';
@@ -11,7 +12,7 @@ export class AllGistsComponent {
   currentUsername: string = 'matthewmueller';
   gists: Gist[] = [];
 
-  constructor(private gistsService: GistsService) {}
+  constructor(private gistsService: GistsService, private router: Router) {}
 
   searchGistsForCurrentUser() {
     this.gistsService
@@ -34,8 +35,8 @@ export class AllGistsComponent {
         });
       });
   }
-  onGistClick() {
-    console.log('gist clicked');
+  onGistClick(id: string) {
+    this.router.navigate(['/gist-details/' + id]);
   }
   getFileExtension(filename: string) {
     return extractFileExtension(filename);

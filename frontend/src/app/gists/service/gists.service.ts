@@ -16,4 +16,10 @@ export class GistsService {
   getGistForks(gistId: string): Observable<any> {
     return this.http.get(this.apiUrl + `gists/${gistId}/forks`);
   }
+  getFileContent(url: string): Observable<any> {
+    return this.http.get(url, { responseType: 'text' });
+  }
+  getGistDetails(gistId: string): Observable<any> {
+    return this.http.get(this.apiUrl + `gists/${gistId}`);
+  }
 }

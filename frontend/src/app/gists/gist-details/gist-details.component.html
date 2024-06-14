@@ -1,0 +1,6 @@
+<div class="code-boxes">
+  <div class="code-box" *ngFor="let file of files">
+    <h3 class="file-name">{{ file.filename }}</h3>
+    <pre class="code-content">{{ file.content }}</pre>
+  </div>
+</div>
