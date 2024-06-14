@@ -15,7 +15,7 @@ export class GistDetailsComponent {
     private route: ActivatedRoute
   ) {
     const gistId = this.route.snapshot.params['id'];
-    console.log(gistId);
+
     this.gistsService.getGistDetails(gistId).subscribe((response) => {
       Object.keys(response.files).forEach((key) => {
         this.gistsService
